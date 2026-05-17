@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malang CISSE – Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0f1d33;
+    --navy-mid: #1a2e4a;
+    --gold: #b8913a;
+    --gold-light: #d4a84b;
+    --cream: #f9f7f2;
+    --cream-dark: #ede9e0;
+    --text: #1a1a1a;
+    --text-mid: #3d3d3d;
+    --text-muted: #777;
+    --border: #ddd8cc;
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'EB Garamond', Georgia, serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem; height: 56px;
+    border-bottom: 1px solid rgba(184,145,58,0.3);
+  }
+  .nav-brand {
+    font-family: 'DM Mono', monospace;
+    color: var(--gold-light);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero-rule {
+    width: 60px; height: 1px;
+    background: var(--gold);
+    margin: 0 auto 1.5rem;
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+  .hero-name {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+  }
+  .hero-name em { font-style: italic; color: var(--gold-light); }
+  .hero-title {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+  .hero-badges {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    justify-content: center; margin-bottom: 2.5rem;
+  }
+  .badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid rgba(184,145,58,0.4);
+    color: rgba(255,255,255,0.65);
+    padding: 5px 14px;
+    border-radius: 2px;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 13px 28px;
+    border-radius: 2px;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .hero-cta:hover { background: var(--gold-light); }
+  .hero-grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(184,145,58,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(184,145,58,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 700px; }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 960px; margin: 0 auto; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+  .section-rule {
+    width: 40px; height: 2px;
+    background: var(--gold);
+    margin-bottom: 2.5rem;
+  }
+
+  /* ABOUT */
+  #about { background: var(--white); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-card {
+    background: var(--navy);
+    border-radius: 2px;
+    padding: 2rem;
+    color: white;
+  }
+  .about-avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 22px;
+    color: var(--navy);
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+  }
+  .about-card h3 { font-size: 1.3rem; color: white; margin-bottom: 0.3rem; font-weight: 400; }
+  .about-card p { font-size: 0.85rem; color: rgba(255,255,255,0.55); font-style: italic; }
+  .about-info { margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.2rem; }
+  .info-row {
+    display: flex; gap: 10px; align-items: baseline;
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    color: rgba(255,255,255,0.5); margin-bottom: 0.5rem;
+  }
+  .info-val { color: rgba(255,255,255,0.85); }
+  .about-text p { color: var(--text-mid); margin-bottom: 1rem; font-size: 1.05rem; }
+  .skills-list {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem;
+  }
+  .skill-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    border: 1px solid var(--border);
+    color: var(--text-mid);
+    padding: 5px 12px;
+    border-radius: 2px;
+  }
+
+  /* PROJECTS */
+  #projects { background: var(--cream); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--gold);
+    border-radius: 2px;
+    padding: 1.8rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .proj-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .proj-title {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 0.8rem;
+    line-height: 1.35;
+  }
+  .proj-desc {
+    font-size: 0.92rem;
+    color: var(--text-mid);
+    margin-bottom: 1.2rem;
+    line-height: 1.65;
+  }
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .proj-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--cream-dark);
+    color: var(--text-mid);
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+
+  /* EXPERIENCE */
+  #experience { background: var(--white); }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 120px; top: 0; bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+  .tl-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: 120px;
+    top: 8px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    transform: translateX(-50%);
+  }
+  .tl-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    text-align: right;
+    padding-top: 2px;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+  }
+  .tl-role { font-size: 1.1rem; font-weight: 400; color: var(--navy); margin-bottom: 0.2rem; }
+  .tl-org { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gold); margin-bottom: 0.6rem; letter-spacing: 0.06em; }
+  .tl-bullets { list-style: none; padding: 0; }
+  .tl-bullets li {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    padding-left: 1rem;
+    position: relative;
+    margin-bottom: 0.3rem;
+  }
+  .tl-bullets li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: var(--gold);
+    font-size: 0.8rem;
+  }
+
+  /* SKILLS */
+  #skills { background: var(--cream); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+  .skill-block {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 1.5rem;
+  }
+  .skill-block h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .skill-items { display: flex; flex-direction: column; gap: 0.4rem; }
+  .skill-item { font-size: 0.88rem; color: var(--text-mid); }
+
+  /* CONTACT */
+  #contact {
+    background: var(--navy);
+    text-align: center;
+    padding: 5rem 2rem;
+  }
+  #contact .section-title { color: var(--white); }
+  #contact .section-label { margin: 0 auto 0.6rem; display: block; }
+  #contact .section-rule { margin: 0 auto 2rem; }
+  #contact p { color: rgba(255,255,255,0.55); max-width: 480px; margin: 0 auto 2rem; font-style: italic; }
+  .contact-links { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+  .contact-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 10px 22px;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .contact-link:hover { background: rgba(184,145,58,0.15); border-color: var(--gold); color: var(--gold-light); }
+  .contact-link.primary {
+    background: var(--gold);
+    color: var(--navy);
+    border-color: var(--gold);
+  }
+  .contact-link.primary:hover { background: var(--gold-light); }
+
+  footer {
+    background: #080f1a;
+    text-align: center;
+    padding: 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.25);
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 1.2rem; }
+    .nav-links { gap: 1rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .timeline::before { left: 0; }
+    .tl-item { grid-template-columns: 1fr; gap: 0.5rem; padding-left: 1.5rem; }
+    .tl-item::before { left: 0; }
+    .tl-date { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">M. Cissé</span>
+  <ul class="nav-links">
+    <li><a href="#about">Profil</a></li>
+    <li><a href="#projects">Projets</a></li>
+    <li><a href="#experience">Expériences</a></li>
+    <li><a href="#skills">Compétences</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-content">
+    <div class="hero-rule"></div>
+    <p class="hero-eyebrow">Portfolio académique & professionnel</p>
+    <h1 class="hero-name">Malang <em>Cissé</em></h1>
+    <p class="hero-title">Data Scientist · Master 2 Probabilités & Statistiques Appliquées</p>
+    <div class="hero-badges">
+      <span class="badge">Machine Learning</span>
+      <span class="badge">Modélisation du risque</span>
+      <span class="badge">NLP</span>
+      <span class="badge">Finance quantitative</span>
+      <span class="badge">Power BI</span>
+    </div>
+    <a href="#projects" class="hero-cta">Voir mes projets →</a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <p class="section-label">À propos</p>
+    <h2 class="section-title">Profil</h2>
+    <div class="section-rule"></div>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-avatar">MC</div>
+        <h3>Malang Cissé</h3>
+        <p>Data Scientist – Analyse & Risque</p>
+        <div class="about-info">
+          <div class="info-row">📍 &nbsp;<span class="info-val">Metz, Grand Est</span></div>
+          <div class="info-row">🎓 &nbsp;<span class="info-val">Université de Lorraine</span></div>
+          <div class="info-row">📧 &nbsp;<span class="info-val">cissemalang11@gmail.com</span></div>
+          <div class="info-row">🌐 &nbsp;<span class="info-val">Français C1 · Anglais B2</span></div>
+        </div>
+      </div>
+      <div class="about-text">
+        <p>Data Scientist spécialisé en modélisation statistique, machine learning et analyse du risque. Solide expérience en data cleaning, analyse exploratoire et visualisation de données.</p>
+        <p>Mon objectif : transformer les données en insights exploitables pour la prise de décision stratégique et le pilotage des performances.</p>
+        <p style="font-style:italic; color: #888; font-size:0.9rem;">Actuellement en recherche de stage de fin d'études (3 à 6 mois) en Data & Finance.</p>
+        <div class="skills-list">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">R</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">Scikit-learn</span>
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">Excel avancé</span>
+          <span class="skill-tag">VBA</span>
+          <span class="skill-tag">Matlab</span>
+          <span class="skill-tag">PL-300 Certifié</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <p class="section-label">Travaux académiques</p>
+    <h2 class="section-title">Projets universitaires</h2>
+    <div class="section-rule"></div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <p class="proj-date">Mars 2026 · Université de Lorraine</p>
+        <h3 class="proj-title">Analyse de sentiment par NLP</h3>
+        <p class="proj-desc">Développement d'un modèle de traitement du langage naturel pour l'analyse automatique des commentaires utilisateurs. Implémentation complète du pipeline NLP avec Python.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">NLP</span>
+          <span class="proj-tag">Deep Learning</span>
+          <span class="proj-tag">Sentiment Analysis</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="proj-date">Janvier 2026 · Université de Lorraine</p>
+        <h3 class="proj-title">Sensibilité du CAC 40 aux marchés européens</h3>
+        <p class="proj-desc">Analyse économétrique de la sensibilité de l'indice CAC 40 face aux indices STOXX 50 et DAX. Étude des corrélations et des dynamiques inter-marchés sous Python et Excel.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">Excel</span>
+          <span class="proj-tag">Finance</span>
+          <span class="proj-tag">Économétrie</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="proj-date">Mars 2025 · Université de Lorraine</p>
+        <h3 class="proj-title">Prédiction de sinistres & modélisation du risque</h3>
+        <p class="proj-desc">Modélisation statistique d'une variable de sinistre à partir d'un jeu de données anonymisé d'assurance. Application des méthodes actuarielles et de machine learning.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">Machine Learning</span>
+          <span class="proj-tag">Risk Modeling</span>
+          <span class="proj-tag">Assurance</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <p class="section-label">Parcours professionnel</p>
+    <h2 class="section-title">Expériences</h2>
+    <div class="section-rule"></div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-date">Juin – Août 2025</div>
+        <div class="tl-content">
+          <p class="tl-role">Stage Data Analyst – Analyse du risque de crédit</p>
+          <p class="tl-org">Crédit Mutuel · Metz</p>
+          <ul class="tl-bullets">
+            <li>Data cleaning, preprocessing et analyse exploratoire sur +5 000 transactions clients.</li>
+            <li>Optimisation de modèles de risk scoring (+15 % de fiabilité).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">Mai – Août 2024</div>
+        <div class="tl-content">
+          <p class="tl-role">Stage Analyse de données & Reporting</p>
+          <p class="tl-org">INSEE · Nancy</p>
+          <ul class="tl-bullets">
+            <li>Structuration et fiabilisation de bases de données (+10 000 enregistrements).</li>
+            <li>Création de dashboards Power BI réduisant le temps de suivi des KPIs de 20 %.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <p class="section-label">Outils & méthodes</p>
+    <h2 class="section-title">Compétences</h2>
+    <div class="section-rule"></div>
+    <div class="skills-grid">
+      <div class="skill-block">
+        <h4>Langages</h4>
+        <div class="skill-items">
+          <span class="skill-item">Python (Pandas, Numpy, Scikit-learn, PyTorch)</span>
+          <span class="skill-item">R · SQL · VBA · Matlab</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h4>Data & IA</h4>
+        <div class="skill-items">
+          <span class="skill-item">Machine Learning · Deep Learning</span>
+          <span class="skill-item">NLP · Scoring · Calcul de VaR</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h4>Outils</h4>
+        <div class="skill-items">
+          <span class="skill-item">Power BI · Tableau · Excel avancé</span>
+          <span class="skill-item">Jupyter · Salesforce</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h4>Certification</h4>
+        <div class="skill-items">
+          <span class="skill-item">PL-300 – Microsoft Power BI</span>
+          <span class="skill-item">Data Analyst Associate</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <span class="section-label">Me contacter</span>
+    <h2 class="section-title">Disponible pour un stage</h2>
+    <div class="section-rule"></div>
+    <p>Data & Finance · 3 à 6 mois · Disponible immédiatement</p>
+    <div class="contact-links">
+      <a href="mailto:cissemalang11@gmail.com" class="contact-link primary">cissemalang11@gmail.com</a>
+      <a href="https://www.linkedin.com/in/malang-cisse24" class="contact-link" target="_blank">LinkedIn →</a>
+      <a href="tel:+33751127398" class="contact-link">07 51 12 73 98</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Malang Cissé · Portfolio académique · Université de Lorraine
+</footer>
+
+</body>
+</html>
